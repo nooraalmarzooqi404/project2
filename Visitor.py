@@ -1,5 +1,7 @@
 #enum options for the attribute category in Visitor class
-class Visitor_category:
+from enum import Enum
+
+class Visitor_category(Enum):
     Adult = 1
     Child = 2
     Teacher = 3
@@ -16,6 +18,17 @@ class Visitor:
         self.__teacher = self.input_boolean("Is the visitor a teacher? (yes/no)")
         self.__student = self.input_boolean("Is the visitor a student? (yes/no)")
         self.__visitor_category = self.determine_category()
+        self.__tickets_history = []  # This attribute holds the history of purchased tickets
+
+    #adding the ticket to tickets history
+    def add_ticket_to_history(self, ticket):
+        self.__tickets_history.append(ticket)
+
+    #a method to display the history of purchased tickets
+    def display_tickets_history(self):
+        from Ticket import Ticket
+        for ticket in self.__tickets_history:
+            ticket.print_receipt()
 
     #input validation for the name
     def input_name(self, prompt):
